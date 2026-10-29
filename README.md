@@ -1,120 +1,152 @@
-QTS 10 — Segurança Ofensiva Básica OWASP
-Testes Práticos contra Injeção de SQL e XSS em APIs
+🛡️ Laboratório de Segurança Ofensiva — OWASP
 
-Projeto desenvolvido para a atividade da disciplina de Qualidade e Teste de Software (QTS), com foco na identificação de vulnerabilidades de segurança em APIs, aplicação de correções e validação por meio de testes automatizados.
+<p align="center">
+<img src="https://img.shields.io/badge/Python-3.12%2B-blue?logo=python&logoColor=white" alt="Python">
+<img src="https://img.shields.io/badge/FastAPI-API-009688?logo=fastapi&logoColor=white" alt="FastAPI">
+<img src="https://img.shields.io/badge/Pytest-Testes-0A9EDC?logo=pytest&logoColor=white" alt="Pytest">
+<img src="https://img.shields.io/badge/OWASP-Segurança-black?logo=owasp&logoColor=white" alt="OWASP">
+<img src="https://img.shields.io/badge/Status-Concluído-success" alt="Status">
+</p>
 
-1. Objetivo
+📚 Sobre o projeto
 
-Analisar vulnerabilidades de SQL Injection e Cross-Site Scripting (XSS) em uma API desenvolvida com FastAPI, demonstrando como essas falhas podem ocorrer e como podem ser mitigadas por meio de práticas seguras de programação.
+Este projeto foi desenvolvido como atividade prática da disciplina Qualidade e Teste de Software (QTS), no módulo 10 — Segurança Ofensiva Básica OWASP.
 
-O projeto compara endpoints vulneráveis com endpoints corrigidos e utiliza testes automatizados para verificar o comportamento da aplicação.
+O laboratório tem como objetivo demonstrar, em um ambiente controlado, como identificar vulnerabilidades em APIs, realizar testes automatizados de segurança e aplicar medidas de proteção contra ataques comuns a aplicações web.
 
-2. Tecnologias utilizadas
-Python
-FastAPI
-SQLite
-Pytest
-TestClient do FastAPI
-HTTPX
-uv para gerenciamento do ambiente e das dependências
-Git e GitHub para versionamento e entrega do projeto
-3. Vulnerabilidades analisadas
-3.1 SQL Injection
+A atividade utiliza uma API de exemplo inspirada no contexto de um sistema de campanhas solidárias, permitindo comparar comportamentos vulneráveis e implementações com mecanismos de defesa.
 
-A injeção de SQL ocorre quando dados fornecidos pelo usuário são incorporados diretamente a uma consulta SQL, permitindo a alteração de sua lógica.
+🎯 Objetivos
+Compreender os riscos da injeção de SQL (SQL Injection).
+Identificar vulnerabilidades de Cross-Site Scripting (XSS).
+Comparar endpoints vulneráveis e protegidos.
+Aplicar consultas SQL parametrizadas (Prepared Statements).
+Utilizar html.escape() para codificação de caracteres HTML.
+Desenvolver testes automatizados com pytest e TestClient.
+Aplicar o padrão AAA: Arrange, Act, Assert.
+Validar as medidas de segurança por meio de testes automatizados.
+🧪 Vulnerabilidades estudadas
+1. SQL Injection (SQLi)
 
-Risco: acesso indevido a informações, possibilidade de contornar autenticações e comprometimento da integridade dos dados.
+A injeção de SQL ocorre quando entradas não confiáveis alteram a estrutura de uma consulta ao banco de dados.
 
-Correção aplicada: utilização de consultas parametrizadas (Prepared Statements), separando os valores fornecidos pelo usuário da estrutura do comando SQL.
+Risco: autenticação indevida, exposição de informações e comprometimento da integridade dos dados.
 
-3.2 Cross-Site Scripting (XSS)
+Medida de proteção: utilização de consultas parametrizadas, separando os comandos SQL dos valores fornecidos pelo usuário.
 
-O XSS ocorre quando conteúdo não confiável é tratado como código executável pelo navegador.
+2. Cross-Site Scripting (XSS)
 
-Risco: execução de scripts indevidos no contexto da aplicação e possíveis ataques contra usuários.
+O XSS acontece quando conteúdo não confiável é interpretado pelo navegador como código executável.
 
-Correção aplicada: codificação de caracteres especiais com html.escape() e tratamento adequado dos dados de entrada e saída, conforme o contexto de utilização.
+Risco: execução de scripts maliciosos no contexto da aplicação e possíveis ataques contra usuários.
 
-4. Estrutura do projeto
+Medida de proteção: codificação contextual de saída, validação de dados e utilização segura do conteúdo fornecido pelo usuário.
+
+Os testes são realizados exclusivamente no ambiente didático local do laboratório.
+🛠️ Tecnologias utilizadas
+Tecnologia	Finalidade
+Python	Linguagem de programação
+FastAPI	Desenvolvimento da API
+SQLite	Banco de dados relacional
+Pytest	Automação dos testes
+TestClient	Testes de endpoints da API
+HTTPX	Suporte às requisições de teste
+uv	Gerenciamento do ambiente e das dependências
+Git e GitHub	Versionamento e publicação do projeto
+📂 Estrutura do projeto
 text
 lab-seguranca-owasp/
+├── evidencias/
+│   ├── Quiz.png
+│   ├── print1.png
+│   └── print2.png
+├── tests/
+│   └── test_seguranca.py
 ├── main.py
 ├── pyproject.toml
 ├── uv.lock
-├── README.md
 ├── .gitignore
-├── tests/
-│   └── test_seguranca.py
-└── evidencias/
-    └── arquivos de evidência, se aplicável
+└── README.md
 
-
-A pasta .venv, os arquivos de cache e outros arquivos temporários não devem ser enviados ao repositório.
-
-5. Testes automatizados
-
-Os testes foram estruturados com o padrão AAA:
-
-Arrange: preparação dos dados e das condições do teste.
-Act: execução da requisição à API.
-Assert: verificação do resultado esperado.
-
-A suíte contempla quatro cenários:
-
-Verificação da vulnerabilidade de SQL Injection no endpoint vulnerável.
-Verificação da exposição de conteúdo HTML no endpoint vulnerável.
-Verificação do bloqueio de SQL Injection no endpoint seguro.
-Verificação da codificação de conteúdo potencialmente perigoso no endpoint seguro.
-6. Como executar o projeto
+⚙️ Como executar o projeto
 Pré-requisitos
+Python instalado.
+Git instalado.
+uv instalado.
+1. Clonar o repositório
+bash
+git clone https://github.com/babi-s4ntos/lab-seguran-a.git
+cd lab-seguran-a
 
-Ter Python e uv instalados, além do Git para versionamento.
-
-Instalação das dependências
-
-No terminal, dentro da pasta do projeto, execute:
-
-powershell
+2. Instalar as dependências
+bash
 uv sync
 
-Execução dos testes
-
-Execute:
-
-powershell
+3. Executar os testes automatizados
+bash
 uv run pytest -v
 
 
-O resultado esperado, caso todos os testes estejam funcionando corretamente, é a aprovação dos quatro testes da suíte.
+O comando executa a suíte de testes e apresenta o resultado individual de cada caso.
 
-text
-4 passed
+✅ Testes de segurança
 
+A suíte automatizada contempla quatro cenários principais:
 
-A saída real do terminal deve ser utilizada como evidência da execução.
+Teste	Resultado esperado
+SQL Injection no endpoint vulnerável	Demonstração da falha
+XSS no endpoint vulnerável	Demonstração da ausência de codificação
+SQL Injection no endpoint seguro	Rejeição da autenticação indevida
+XSS no endpoint seguro	Conteúdo codificado com entidades HTML
 
-7. Resultados e conclusões
+Os testes seguem o padrão AAA:
 
-A atividade demonstra a importância de identificar falhas de segurança por meio de testes automatizados, comparar comportamentos vulneráveis e seguros e aplicar correções no código.
+Arrange: preparação dos dados e das condições do teste.
+Act: execução da requisição à API.
+Assert: verificação do comportamento esperado.
 
-As consultas parametrizadas ajudam a impedir a alteração da lógica SQL por entradas maliciosas. A codificação contextual de conteúdo ajuda a evitar que dados sejam interpretados como marcação HTML executável.
+O resultado esperado para a suíte fornecida é de 4 testes aprovados. A confirmação deve ser feita executando os testes no ambiente local.
 
-Os testes automatizados permitem verificar se as proteções implementadas apresentam o comportamento esperado e podem ser executados novamente após alterações no código.
+🖼️ Evidências da atividade
 
-8. Evidências da atividade
+As capturas de tela e os registros da atividade estão disponíveis na pasta evidencias/.
 
-Podem ser incluídas na pasta evidencias/:
+Quiz de fixação
 
-Captura de tela da execução do uv run pytest -v.
-Resultado do quiz da plataforma, se solicitado.
-Relatório da atividade em PDF, caso faça parte das exigências de entrega.
-9. Referências
-OWASP Top 10: https://owasp.org/www-project-top-ten/
-OWASP SQL Injection Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/SQL_Injection_Prevention_Cheat_Sheet.html
-OWASP Cross Site Scripting Prevention Cheat Sheet: https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
-FastAPI: https://fastapi.tiangolo.com/
-Pytest: https://docs.pytest.org/
+!Resultado do quiz
 
-Disciplina: Qualidade e Teste de Software (QTS)
-Atividade: 10 — Segurança Ofensiva Básica OWASP
-Tema: Testes práticos contra SQL Injection e XSS em APIs
+Evidência 1
+
+!Evidência 1
+
+Evidência 2
+
+!Evidência 2
+
+📖 Conteúdos da disciplina QTS
+
+O projeto integra os conteúdos estudados ao longo da disciplina:
+
+Introdução
+Testes Unitários
+Psicologia do Teste e Maturidade
+Técnicas de Caixa Branca e Caixa Preta
+AT1 — Engenharia de Testes e Cobertura de Código
+Testes de Integração e Mocks
+Testes End-to-End com Playwright
+Usabilidade, Acessibilidade e Auditoria
+Testes de Carga e Performance
+Segurança Ofensiva Básica OWASP
+🎓 Aprendizados
+
+A atividade permitiu explorar a importância dos testes de segurança no desenvolvimento de software, compreender vulnerabilidades comuns em APIs e verificar como medidas defensivas podem ser validadas automaticamente.
+
+Também reforçou a importância de revisar códigos gerados por ferramentas de inteligência artificial, garantindo que as implementações atendam aos requisitos de segurança e qualidade.
+
+🔗 Links
+Repositório GitHub: https://github.com/babi-s4ntos/lab-seguran-a
+Material da aula: Testes Práticos contra Injeção de SQL e XSS em APIs
+
+<p align="center">
+Desenvolvido como atividade acadêmica da disciplina <strong>Qualidade e Teste de Software (QTS)</strong>.
+</p>

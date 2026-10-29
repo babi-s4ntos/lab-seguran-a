@@ -1,0 +1,10 @@
+[project]
+name = "lab-seguranca-owasp"
+version = "0.1.0"
+requires-python = ">=3.10"
+dependencies = ["fastapi", "uvicorn", "pytest", "httpx"]
+
+[tool.pytest.ini_options]
+markers = [
+    "security: testes de seguranca OWASP"
+]
